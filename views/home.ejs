@@ -63,10 +63,57 @@
 
         /* update date */
 
-        const time = document.querySelector('#crnt-date');
-        
+        function updateDate() {
 
-        time.innerText = new Intl.DateTimeFormat('ar-TN-u-ca-islamic', {day: 'numeric', month: 'long',weekday: 'long',year : 'numeric'}).format(Date.now());
+            const time = document.querySelector('#crnt-date');
+
+            const formattedDate = new Intl.DateTimeFormat('ar-TN-u-ca-islamic', {
+                day: 'numeric',
+                month: 'long',
+                weekday: 'long',
+                year: 'numeric'
+            }).format(Date.now());
+
+
+            const monthMap = {
+                'محرم': 'Muharram',
+                'صفر': 'Safar',
+                'ربيع الأول': 'Rabi\' al-Awwal',
+                'ربيع الآخر': 'Rabi\' al-Thani',
+                'جمادى الأولى': 'Jumada al-Awwal',
+                'جمادى الآخرة': 'Jumada al-Thani',
+                'رجب': 'Rajab',
+                'شعبان': 'Sha\'ban',
+                'رمضان': 'Ramadan',
+                'شوال': 'Shawwal',
+                'ذو القعدة': 'Dhu al-Qi\'dah',
+                'ذو الحجة': 'Jilhaz'
+            };
+
+
+            // Split the formatted date string
+            const dateParts = formattedDate.split(' ');
+
+            const twoWordMonths = ['ذو', 'ربيع', 'جمادى'];
+
+            let monthArabic = dateParts[2];
+            let yearArabic = dateParts[3];
+            if (twoWordMonths.includes(dateParts[2])) {
+                monthArabic = `${dateParts[2]} ${dateParts[3]}`;
+                yearArabic = dateParts[4];
+            }
+
+            // Translate the month part using the map
+            const translatedMonth = monthMap[monthArabic] || monthArabic;
+
+            // Reassemble the date string
+            const modifiedDate = `${dateParts[1]} ${translatedMonth}, ${yearArabic}`;
+
+            time.innerText = modifiedDate;
+        }
+
+        setInterval(updateDate, 1000);
+
         /* todo script begin */
 
         const taskInput = document.querySelector(".task-input input"),
