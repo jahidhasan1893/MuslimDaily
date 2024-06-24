@@ -38,6 +38,9 @@ app.use(cookieParser());
 app.get('/', verifyToken, (req, res) => {
     res.render('home');
 });
+app.get('/quran', (req, res)=>{
+    res.render('quran');
+})
 app.use('/signup', require('./routes/signup'));
 app.use('/signin', require('./routes/signin'));
 app.use('/signout', require('./routes/signout'));

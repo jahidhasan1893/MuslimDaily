@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/homeStyles.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <title>Muslim Daily</title>
+</head>
+
+<body>
+    <header class="header-area">
+        
+        <!-- site-navbar -->
+        <%- include('partials/navbar') %>
+
+        <div class="intro-area">
+            <div class="container">
+            </div>
+        </div>
+    </header>
+
+    <script>
+
+        /* mobile nav controller script starts */
+
+        // define all UI variable
+        const navToggler = document.querySelector('.nav-toggler');
+        const navMenu = document.querySelector('.site-navbar ul');
+        const navLinks = document.querySelectorAll('.site-navbar a');
+
+        // load all event listners
+        allEventListners();
+
+        // functions of all event listners
+        function allEventListners() {
+            // toggler icon click event
+            navToggler.addEventListener('click', togglerClick);
+            // nav links click event
+            navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
+        }
+
+        // togglerClick function
+        function togglerClick() {
+            navToggler.classList.toggle('toggler-open');
+            navMenu.classList.toggle('open');
+        }
+
+        // navLinkClick function
+        function navLinkClick() {
+            if (navMenu.classList.contains('open')) {
+                navToggler.click();
+            }
+        }
+
+        /* mobile navcontroller script ends */
+    </script>
+</body>
+
+</html>

@@ -11,52 +11,34 @@
 
 <body>
     <header class="header-area">
-        <!-- site-navbar start -->
-        <div class="navbar-area">
-            <div class="container">
-                <nav class="site-navbar">
-                    <!-- site logo -->
-                    <img src="/images/logo.png" style="width: 133.5px; height: 50px;" class="site-logo" alt="site logo">
-                    <!-- site menu/nav -->
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Books</a></li>
-                        <li><a href="/signout">Sign Out</a></li>
-                    </ul>
-                    <!-- nav-toggler for mobile version only -->
-                    <button class="nav-toggler">
-                        <span></span>
-                    </button>
-                </nav>
-            </div>
-        </div><!-- navbar-area end -->
+        <!-- site-navbar  -->
+        <%- include('partials/navbar') %>
 
-        <div class="intro-area">
-            <div class="container">
-                <div class="wrapper">
-                    <h3 style="color: #20665C;  font-size: 30px;
+            <div class="intro-area">
+                <div class="container">
+                    <div class="wrapper">
+                        <h3 style="color: #20665C;  font-size: 30px;
                     font-weight: 500;
                     line-height: 50px;
                     margin-bottom: 10px;">Muslim Checklist</h3>
-                    <p style="color: #20665C;margin-bottom: 25px;" id="crnt-date"></p>
-                    <div class="task-input">
-                        <img src="/images/bars-icon.png" alt="icon"
-                            style="width:30px;color: linear-gradient(135deg, #108372 0%, #20665C 100%);">
-                        <input type="text" placeholder="Add a new task">
-                    </div>
-                    <div class="controls">
-                        <div class="filters">
-                            <span class="active" id="all">All</span>
-                            <span id="pending">Pending</span>
-                            <span id="completed">Completed</span>
+                        <p style="color: #20665C;margin-bottom: 25px;" id="crnt-date"></p>
+                        <div class="task-input">
+                            <img src="/images/bars-icon.png" alt="icon"
+                                style="width:30px;color: linear-gradient(135deg, #108372 0%, #20665C 100%);">
+                            <input type="text" placeholder="Add a new task">
                         </div>
-                        <button class="clear-btn">Clear All</button>
+                        <div class="controls">
+                            <div class="filters">
+                                <span class="active" id="all">All</span>
+                                <span id="pending">Pending</span>
+                                <span id="completed">Completed</span>
+                            </div>
+                            <button class="clear-btn">Clear All</button>
+                        </div>
+                        <ul class="task-box"></ul>
                     </div>
-                    <ul class="task-box"></ul>
                 </div>
             </div>
-        </div>
     </header>
 
     <script>
