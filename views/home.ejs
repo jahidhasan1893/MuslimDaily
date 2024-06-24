@@ -38,9 +38,11 @@
                     <h3 style="color: #20665C;  font-size: 30px;
                     font-weight: 500;
                     line-height: 50px;
-                    margin-bottom: 25px;">Muslim Checklist</h3>
+                    margin-bottom: 10px;">Muslim Checklist</h3>
+                    <p style="color: #20665C;margin-bottom: 25px;" id="crnt-date"></p>
                     <div class="task-input">
-                        <img src="/images/bars-icon.png" alt="icon" style="width:30px;color: linear-gradient(135deg, #108372 0%, #20665C 100%);">
+                        <img src="/images/bars-icon.png" alt="icon"
+                            style="width:30px;color: linear-gradient(135deg, #108372 0%, #20665C 100%);">
                         <input type="text" placeholder="Add a new task">
                     </div>
                     <div class="controls">
@@ -58,6 +60,15 @@
     </header>
 
     <script>
+
+        /* update date */
+
+        const time = document.querySelector('#crnt-date');
+        
+
+        time.innerText = new Intl.DateTimeFormat('ar-TN-u-ca-islamic', {day: 'numeric', month: 'long',weekday: 'long',year : 'numeric'}).format(Date.now());
+        /* todo script begin */
+
         const taskInput = document.querySelector(".task-input input"),
             filters = document.querySelectorAll(".filters span"),
             clearAll = document.querySelector(".clear-btn"),
@@ -164,6 +175,41 @@
                 showTodo(document.querySelector("span.active").id);
             }
         });
+
+        /* todo script end */
+
+        /* mobile nav controller script starts */
+
+        // define all UI variable
+        const navToggler = document.querySelector('.nav-toggler');
+        const navMenu = document.querySelector('.site-navbar ul');
+        const navLinks = document.querySelectorAll('.site-navbar a');
+
+        // load all event listners
+        allEventListners();
+
+        // functions of all event listners
+        function allEventListners() {
+            // toggler icon click event
+            navToggler.addEventListener('click', togglerClick);
+            // nav links click event
+            navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
+        }
+
+        // togglerClick function
+        function togglerClick() {
+            navToggler.classList.toggle('toggler-open');
+            navMenu.classList.toggle('open');
+        }
+
+        // navLinkClick function
+        function navLinkClick() {
+            if (navMenu.classList.contains('open')) {
+                navToggler.click();
+            }
+        }
+
+        /* mobile navcontroller script ends */
     </script>
 </body>
 

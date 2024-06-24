@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muslim Daily</title>
+</head>
+
+<body>
+
+    <button onclick=adminSignIn()>sign in</button>
+</body>
+<script>
+    async function adminSignIn() {
+        const username = prompt('Enter Admin Username: ');
+        const password = prompt('Enter Admin Password: ');
+
+        console.log(username, password);
+
+        try {
+            const res = await fetch('/admin', {
+                method: 'POST',
+                body: JSON.stringify({ username, password }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            const data = await res.json();
+            console.log("data : ", data);
+            if (data.error) {
+                console.log("error: ", data.error);
+                location.assign('/signup');
+            }
+            if (data.success) {
+                console.log("success: ", data.success);
+                location.assign('/admin/dashboard');
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+</script>
+
+</html>

@@ -41,6 +41,7 @@ app.get('/', verifyToken, (req, res) => {
 app.use('/signup', require('./routes/signup'));
 app.use('/signin', require('./routes/signin'));
 app.use('/signout', require('./routes/signout'));
+app.use('/admin',require('./routes/adminAuth'));
 
 
 
