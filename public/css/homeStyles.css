@@ -487,17 +487,3 @@ a.site-logo {
   font-size: 12px;
   color: #a0a0a0;
 }
-.reset-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #108372 0%, #20665C 100%);
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.reset-button:hover {
-  opacity: 0.9;
-  pointer-events: auto;
-}

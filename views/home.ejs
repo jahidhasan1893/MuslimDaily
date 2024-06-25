@@ -222,7 +222,7 @@
 
             const time = document.querySelector('#crnt-date');
 
-            const formattedDate = new Intl.DateTimeFormat('en-u-ca-islamic-civil', {
+            const formattedDate = new Intl.DateTimeFormat('en-u-ca-islamic-ummul-qura', {
                 day: 'numeric',
                 month: 'long',
                 weekday: 'long',
@@ -235,7 +235,7 @@
             time.innerText = formattedDate;
         }
 
-        setInterval(updateDate, 1000);
+        updateDate();
 
         /* todo script begin */
 
