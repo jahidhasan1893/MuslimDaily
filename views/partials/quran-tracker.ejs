@@ -1,0 +1,55 @@
+<div>
+    <div class="tracker-container">
+        <div class="tracker-header">
+            <img src="/images/book.png" alt="Book Icon">
+            <h3
+                style="color: #20665C; font-size: 30px; font-weight: 500; line-height: 50px; margin-bottom: 10px;">
+                Quran Tracker</h3>
+        </div>
+        <div class="tracker-stats">
+            <div id="verses">
+                <div
+                    style="height: 50px; background: linear-gradient(135deg, #8b3b44 0%, #9e1126 100%); border-radius: 5px;">
+                </div>
+                <span>VERSE(S)</span>
+                <input type="number" id="verses-input" value="0"
+                    onchange="updateProgress('verses', this.value, 6666)">
+                <!-- <p class="count">0</p> -->
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div id="surahs">
+                <div
+                    style="height: 50px; background: linear-gradient(135deg, #4086bb 0%, #203d66 100%); border-radius: 5px;">
+                </div>
+                <span>SURAH(S)</span>
+                <input type="number" id="surahs-input" value="0"
+                    onchange="updateProgress('surahs', this.value, 114)">
+                <!-- <p class="count">0</p> -->
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div id="chapters">
+                <div
+                    style="height: 50px; background: linear-gradient(135deg, #d8a761 0%, #be7214 100%); border-radius: 5px;">
+                </div>
+                <span>CHAPTER(S)</span>
+                <input type="number" id="chapters-input" value="0"
+                    onchange="updateProgress('chapters', this.value, 30)">
+                <!-- <p class="count">0</p> -->
+                <div class="progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="tracker-subtitle">
+            <div>MEMORIZED</div>
+            <div>RECITED</div>
+        </div> -->
+        <!-- <button class="reset-button" onclick="resetCounts()">Reset</button> -->
+    </div>
+    
+</div>
+
