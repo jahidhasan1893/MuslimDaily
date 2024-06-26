@@ -24,9 +24,100 @@
                     <p style="color: #f2e5e5; margin: 25px auto;" id="crnt-date"></p>
                     <div class="wrapper">
                         <div class="slider">
-                            <%- include('partials/prayer-tracker') %>
-                            <%- include('partials/quran-tracker') %>
-                            <%- include('partials/muslim-checklist') %>
+                            <!-- Add more slides here if needed -->
+
+                            <div>
+                                <h3
+                                    style="color: #20665C; font-size: 30px; font-weight: 500; line-height: 50px; margin-bottom: 10px;">
+                                    Prayer Tracker</h3>
+
+                            </div>
+
+                            <!-- Add more slides here if needed -->
+
+                            <div>
+                                <!-- <h3
+                                    style="color: #20665C; font-size: 30px; font-weight: 500; line-height: 50px; margin-bottom: 10px;">
+                                    Quran Tracker</h3> -->
+
+                                <div class="tracker-container">
+                                    <div class="tracker-header">
+                                        <img src="/images/book.png" alt="Book Icon">
+                                        <h3
+                                            style="color: #20665C; font-size: 30px; font-weight: 500; line-height: 50px; margin-bottom: 10px;">
+                                            Quran Tracker</h3>
+                                    </div>
+                                    <div class="tracker-stats">
+                                        <div id="verses">
+                                            <div
+                                                style="height: 50px; background: linear-gradient(135deg, #8b3b44 0%, #9e1126 100%); border-radius: 5px;">
+                                            </div>
+                                            <span>VERSE(S)</span>
+                                            <input type="number" id="verses-input" value="0"
+                                                onchange="updateProgress('verses', this.value, 6666)">
+                                            <!-- <p class="count">0</p> -->
+                                            <div class="progress">
+                                                <div class="progress-bar"></div>
+                                            </div>
+                                        </div>
+                                        <div id="surahs">
+                                            <div
+                                                style="height: 50px; background: linear-gradient(135deg, #4086bb 0%, #203d66 100%); border-radius: 5px;">
+                                            </div>
+                                            <span>SURAH(S)</span>
+                                            <input type="number" id="surahs-input" value="0"
+                                                onchange="updateProgress('surahs', this.value, 114)">
+                                            <!-- <p class="count">0</p> -->
+                                            <div class="progress">
+                                                <div class="progress-bar"></div>
+                                            </div>
+                                        </div>
+                                        <div id="chapters">
+                                            <div
+                                                style="height: 50px; background: linear-gradient(135deg, #d8a761 0%, #be7214 100%); border-radius: 5px;">
+                                            </div>
+                                            <span>CHAPTER(S)</span>
+                                            <input type="number" id="chapters-input" value="0"
+                                                onchange="updateProgress('chapters', this.value, 30)">
+                                            <!-- <p class="count">0</p> -->
+                                            <div class="progress">
+                                                <div class="progress-bar"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="tracker-subtitle">
+                                        <div>MEMORIZED</div>
+                                        <div>RECITED</div>
+                                    </div> -->
+                                    <!-- <button class="reset-button" onclick="resetCounts()">Reset</button> -->
+                                </div>
+
+
+                            </div>
+
+                            <div>
+
+                                <div class="tracker-header">
+                                    <img src="/images/checklist.png" alt="Checklist Icon">
+                                    <h3
+                                        style="color: #20665C; font-size: 30px; font-weight: 500; line-height: 50px; margin-bottom: 10px;">
+                                        Muslim Checklist</h3>
+                                </div>
+                                <div class="task-input">
+                                    <img src="/images/bars-icon.png" alt="icon"
+                                        style="width:30px; color: linear-gradient(135deg, #108372 0%, #20665C 100%);">
+                                    <input type="text" placeholder="Add a new task">
+                                </div>
+                                <div class="controls">
+                                    <div class="filters">
+                                        <span class="active" id="all">All</span>
+                                        <span id="pending">Pending</span>
+                                        <span id="completed">Completed</span>
+                                    </div>
+                                    <button class="clear-btn">Clear All</button>
+                                </div>
+                                <ul class="task-box"></ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -38,13 +129,92 @@
 
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-    <script src="/js/quran-tracker.js"></script>
-    <script src="/js/carousel.js"></script>
-    <script src="/js/muslim-checklist.js"></script>
-    <script src="/js/navcontroller.js"></script>
-
 
     <script>
+
+        /* quran tracker functionality */
+
+        function isNumber(value) {
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        }
+
+        function updateProgress(id, value, goal) {
+            const inputBox = document.getElementById(id + '-input');
+            if (value === "") {
+                value = 0;
+                inputBox.value = 0;
+            }
+            // if(!isNumber(value)){
+            //     value = 0;
+            //     inputBox.value=0;
+            // }
+            const progressBar = document.getElementById(id).querySelector('.progress-bar');
+            progressBar.style.width = ((value <= goal ? value : goal) / goal * 100) + '%';
+        }
+
+        function resetCounts() {
+            const elements = document.querySelectorAll('.tracker-stats .count');
+            elements.forEach(element => {
+                element.innerText = 0;
+            });
+            const progressBars = document.querySelectorAll('.tracker-stats .progress-bar');
+            progressBars.forEach(progressBar => {
+                progressBar.style.width = '0%';
+            });
+        }
+
+        /* carousel functionality added */
+        $(document).ready(function () {
+            $('.slider').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: true,
+                infinite: false,
+                arrows: true,
+                accessibility: true,
+                swipe: true,
+                touchMove: true,
+                swipeToSlide: true,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            arrows: true
+                        }
+                    }
+                ]
+            });
+
+            // Set focus to the slider container on page load
+            $('.slider').on('init', function (event, slick) {
+                setTimeout(function () {
+                    slick.$slider.attr('tabindex', 0).focus();
+                }, 0);
+            });
+
+            // Additional event listener to ensure focus is on the slider after initialization
+            $('.slider').focus(function () {
+                $(this).slick('slickGoTo', $(this).slick('slickCurrentSlide'));
+            });
+
+            // Enable keyboard navigation
+            $(document).on('keydown', function (e) {
+                var $slider = $('.slider');
+                if ($slider.is(':focus')) {
+                    switch (e.key) {
+                        case 'ArrowLeft':
+                            $slider.slick('slickPrev');
+                            break;
+                        case 'ArrowRight':
+                            $slider.slick('slickNext');
+                            break;
+                    }
+                }
+            });
+
+        });
+
+
 
         /* update date */
 
@@ -52,7 +222,7 @@
 
             const time = document.querySelector('#crnt-date');
 
-            const formattedDate = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', {
+            const formattedDate = new Intl.DateTimeFormat('en-u-ca-islamic-ummul-qura', {
                 day: 'numeric',
                 month: 'long',
                 weekday: 'long',
@@ -67,6 +237,149 @@
 
         updateDate();
 
+        /* todo script begin */
+
+        const taskInput = document.querySelector(".task-input input"),
+            filters = document.querySelectorAll(".filters span"),
+            clearAll = document.querySelector(".clear-btn"),
+            taskBox = document.querySelector(".task-box");
+
+        let editId,
+            isEditTask = false,
+            todos = JSON.parse(localStorage.getItem("todo-list")) || [];
+
+        filters.forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelector("span.active").classList.remove("active");
+                btn.classList.add("active");
+                showTodo(btn.id);
+            });
+        });
+
+        function showTodo(filter) {
+            let liTag = "";
+            if (todos.length) {
+                todos.forEach((todo, id) => {
+                    let completed = todo.status === "completed" ? "checked" : "";
+                    if (filter === todo.status || filter === "all") {
+                        liTag += `<li class="task">
+                            <label for="${id}">
+                                <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${completed}>
+                                <p class="${completed}">${todo.name}</p>
+                            </label>
+                            <div class="settings">
+                                <i onclick="showMenu(this)" class="uil uil-ellipsis-h" style="color:#20665C"></i>
+                                <ul class="task-menu">
+                                    <li onclick='editTask(${id}, "${todo.name}")'><i class="uil uil-pen"></i>Edit</li>
+                                    <li onclick='deleteTask(${id}, "${filter}")'><i class="uil uil-trash"></i>Delete</li>
+                                </ul>
+                            </div>
+                        </li>`;
+                    }
+                });
+            }
+            taskBox.innerHTML = liTag || `<span style= "color: #20665C">You don't have any task here</span>`;
+            let checkTask = taskBox.querySelectorAll(".task");
+            !checkTask.length ? clearAll.classList.remove("active") : clearAll.classList.add("active");
+            taskBox.offsetHeight >= 300 ? taskBox.classList.add("overflow") : taskBox.classList.remove("overflow");
+        }
+        showTodo("all");
+
+        function showMenu(selectedTask) {
+            let menuDiv = selectedTask.parentElement.lastElementChild;
+            menuDiv.classList.add("show");
+            document.addEventListener("click", e => {
+                if (e.target.tagName !== "I" || e.target !== selectedTask) {
+                    menuDiv.classList.remove("show");
+                }
+            });
+        }
+
+        function updateStatus(selectedTask) {
+            let taskName = selectedTask.parentElement.querySelector("p");
+            if (selectedTask.checked) {
+                taskName.classList.add("checked");
+                todos[selectedTask.id].status = "completed";
+            } else {
+                taskName.classList.remove("checked");
+                todos[selectedTask.id].status = "pending";
+            }
+            localStorage.setItem("todo-list", JSON.stringify(todos));
+        }
+
+        function editTask(taskId, textName) {
+            editId = taskId;
+            isEditTask = true;
+            taskInput.value = textName;
+            taskInput.focus();
+            taskInput.classList.add("active");
+        }
+
+        function deleteTask(deleteId, filter) {
+            isEditTask = false;
+            todos.splice(deleteId, 1);
+            localStorage.setItem("todo-list", JSON.stringify(todos));
+            showTodo(filter);
+        }
+
+        clearAll.addEventListener("click", () => {
+            isEditTask = false;
+            todos.splice(0, todos.length);
+            localStorage.setItem("todo-list", JSON.stringify(todos));
+            showTodo("all");
+        });
+
+        taskInput.addEventListener("keyup", e => {
+            let userTask = taskInput.value.trim();
+            if (e.key === "Enter" && userTask) {
+                if (!isEditTask) {
+                    todos = !todos ? [] : todos;
+                    let taskInfo = { name: userTask, status: "pending" };
+                    todos.push(taskInfo);
+                } else {
+                    isEditTask = false;
+                    todos[editId].name = userTask;
+                }
+                taskInput.value = "";
+                localStorage.setItem("todo-list", JSON.stringify(todos));
+                showTodo(document.querySelector("span.active").id);
+            }
+        });
+
+        /* todo script end */
+
+        /* mobile nav controller script starts */
+
+        // define all UI variable
+        const navToggler = document.querySelector('.nav-toggler');
+        const navMenu = document.querySelector('.site-navbar ul');
+        const navLinks = document.querySelectorAll('.site-navbar a');
+
+        // load all event listners
+        allEventListners();
+
+        // functions of all event listners
+        function allEventListners() {
+            // toggler icon click event
+            navToggler.addEventListener('click', togglerClick);
+            // nav links click event
+            navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
+        }
+
+        // togglerClick function
+        function togglerClick() {
+            navToggler.classList.toggle('toggler-open');
+            navMenu.classList.toggle('open');
+        }
+
+        // navLinkClick function
+        function navLinkClick() {
+            if (navMenu.classList.contains('open')) {
+                navToggler.click();
+            }
+        }
+
+        /* mobile navcontroller script ends */
     </script>
 </body>
 
