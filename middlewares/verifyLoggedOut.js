@@ -5,23 +5,23 @@ const secretKey = process.env.SECRET_KEY;
 
 
 
-const verifyToken = (req, res, next) => {
+const verifyLoggedOut = (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
     console.log('token not found');
-    res.redirect('/signup');
+    next();
   } else {
     jwt.verify(token, secretKey, (err, decodedToken) => {
       if (err) {
         console.log(err.message);
-        res.redirect('/signup');
-      } else {
         next();
+      } else {
+        res.redirect('/');
       }
     });
   }
 };
 
 
-module.exports = verifyToken;
+module.exports = verifyLoggedOut;

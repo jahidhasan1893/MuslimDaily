@@ -8,7 +8,7 @@ const ejs = require('ejs');
 
 const cookieParser = require('cookie-parser');
 
-const verifyToken = require('./middlewares/verifyToken');
+const verifyLoggedIn = require('./middlewares/verifyLoggedIn');
 
 const getUser = require('./middlewares/getUser');
 
@@ -35,7 +35,7 @@ app.use(cookieParser());
 
 //routes
 
-app.get('/', verifyToken, (req, res) => {
+app.get('/', verifyLoggedIn, (req, res) => {
     res.render('home');
 });
 app.get('/quran', (req, res)=>{

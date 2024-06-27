@@ -2,7 +2,10 @@ const router = require('express').Router();
 
 const signupController = require('../controllers/signupController');
 
-router.get('/', signupController.getSignup);
+const verifyLoggedOut = require('../middlewares/verifyLoggedOut');
+
+
+router.get('/',verifyLoggedOut, signupController.getSignup);
 
 router.post('/', signupController.postSignup);
 
